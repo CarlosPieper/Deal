@@ -6,7 +6,7 @@ namespace UnitTests
     public class CreateUserControllerTests
     {
         [Fact]
-        public void Test1()
+        public void CreateUserTest()
         {
 
         }

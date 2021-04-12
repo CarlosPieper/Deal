@@ -1,6 +1,7 @@
 using System;
 using System.Text.RegularExpressions;
 using Api.Models;
+using Api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.UseCases.Users.CreateUser
@@ -9,9 +10,10 @@ namespace Api.UseCases.Users.CreateUser
     [Route("CreateUser")]
     public class CreateUserController : Controller
     {
-        public CreateUserController()
+        private IUserRepository _repository;
+        public CreateUserController(IUserRepository repository)
         {
-
+            this._repository = repository;
         }
 
         [HttpPost]
@@ -19,7 +21,15 @@ namespace Api.UseCases.Users.CreateUser
         {
             this.ValidateUserCreation(user);
 
-            User userBeingCreated = new User(user);
+            var userBeingCreated = new User(user);
+            try
+            {
+                this._repository.Create(userBeingCreated);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
 
             return Ok();
         }
