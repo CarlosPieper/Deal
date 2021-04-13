@@ -17,14 +17,15 @@ namespace Api.UseCases.Users.CreateUser
         }
 
         [HttpPost]
-        public IActionResult Execute(CreateUserDTO user)
+        public IActionResult Execute(CreateUserDTO data)
         {
-            this.ValidateUserCreation(user);
+            this.ValidateUserCreation(data);
 
-            var userBeingCreated = new User(user);
+            User user = new User(data);
+
             try
             {
-                this._repository.Create(userBeingCreated);
+                this._repository.Create(user);
             }
             catch (Exception ex)
             {
@@ -34,11 +35,11 @@ namespace Api.UseCases.Users.CreateUser
             return Ok();
         }
 
-        public void ValidateUserCreation(CreateUserDTO user)
+        public void ValidateUserCreation(CreateUserDTO data)
         {
             try
             {
-                var isValidEmail = Regex.IsMatch(user.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                var isValidEmail = Regex.IsMatch(data.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                 if (!isValidEmail)
                 {
                     throw new Exception("Invalid Email.");
@@ -49,7 +50,7 @@ namespace Api.UseCases.Users.CreateUser
                 throw new Exception("Invalid Email.");
             }
 
-            if (user.Password != user.PasswordConfirmation)
+            if (data.Password != data.PasswordConfirmation)
             {
                 throw new Exception("Password confirmation does not match with password.");
             }
