@@ -39,8 +39,6 @@ namespace Api
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
             //var connection = new NpgsqlConnection(Configuration.GetConnectionString("PostgreSqlConnectionString"));
             services.AddControllers();
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<ICryptographyService, CryptographyService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });
@@ -64,6 +62,8 @@ namespace Api
                     ValidateAudience = false
                 };
             });
+
+            CreateDependencies.AddSingletons(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
