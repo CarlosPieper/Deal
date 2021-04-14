@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Api.Models;
 using Api.Repositories.Interfaces;
 
@@ -6,27 +5,27 @@ namespace Api.Repositories.Implementations
 {
     public class UserRepository : IUserRepository
     {
-        public Task Create(User user)
+        public void Create(User user)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task Deactivate(string id)
+        public void Deactivate(string id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> FindByEmail(string email)
+        public User FindByEmail(string email)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<User> FindById(string id)
+        public User FindById(string id)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task Update(User user)
+        public void Update(User user)
         {
             throw new System.NotImplementedException();
         }

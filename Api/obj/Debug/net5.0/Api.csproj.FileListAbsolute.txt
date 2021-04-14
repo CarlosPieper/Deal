@@ -27,3 +27,11 @@
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/ref/Api.dll
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.pdb
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.genruntimeconfig.cache
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.AspNetCore.Authentication.JwtBearer.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.IdentityModel.JsonWebTokens.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.IdentityModel.Logging.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Microsoft.IdentityModel.Tokens.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Npgsql.dll
+/home/carlos/Projects/Deal/Api/bin/Debug/net5.0/System.IdentityModel.Tokens.Jwt.dll

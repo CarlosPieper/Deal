@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Api.Entities;
 using Api.Models;
 using Api.Repositories.Interfaces;
-using Microsoft.AspNetCore.Identity;
+using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -18,40 +18,37 @@ namespace Api.UseCases.Users.AuthenticateUser
     public class AuthenticateUserController : Controller
     {
         private IUserRepository _repository;
-        private UserManager<User> _userManager;
-        private SignInManager<User> _signInManager;
         private readonly ApplicationSettings _appSettings;
+        private ICryptographyService _cryptographyService;
         public AuthenticateUserController(
             IUserRepository repository,
-            UserManager<User> userManager,
-            SignInManager<User> signInManager,
-            IOptions<ApplicationSettings> appSettings
+            IOptions<ApplicationSettings> appSettings,
+            ICryptographyService cryptographyService
             )
         {
             this._repository = repository;
-            this._userManager = userManager;
-            this._signInManager = signInManager;
             this._appSettings = appSettings.Value;
+            this._cryptographyService = cryptographyService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Execute(AuthenticateUserDTO data)
+        public IActionResult Execute(AuthenticateUserDTO data)
         {
             try
             {
-                User user = await this._repository.FindByEmail(data.Email);
+                User user = this._repository.FindByEmail(data.Email);
                 if (user == null)
-                    return BadRequest("Email not found.");
+                    return BadRequest(new { message = "Email not found." });
 
-                if (await _userManager.CheckPasswordAsync(user, data.Password))
+                string password = this._cryptographyService.EncryptPassword(data.Password);
+                if (user.Password == password)
                 {
                     var token = this.CreateToken(user);
                     user.Password = "";
                     return Ok(new { user, token });
-                    //methods that have to be authenticated just need the flas [Authorize] before executing
                 }
                 else
-                    return BadRequest("Wrong password.");
+                    return BadRequest(new { message = "Wrong password." });
             }
             catch (Exception ex)
             {

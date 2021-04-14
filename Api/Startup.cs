@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using Api.Entities;
 using Api.Repositories.Implementations;
 using Api.Repositories.Interfaces;
+using Api.Services.Implementations;
+using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,9 +37,10 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
-            var connection = new NpgsqlConnection(Configuration.GetConnectionString("PostgreSqlConnectionString"));
+            //var connection = new NpgsqlConnection(Configuration.GetConnectionString("PostgreSqlConnectionString"));
             services.AddControllers();
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<ICryptographyService, CryptographyService>();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Api", Version = "v1" });

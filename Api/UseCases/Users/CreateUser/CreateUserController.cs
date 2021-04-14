@@ -2,6 +2,7 @@ using System;
 using System.Text.RegularExpressions;
 using Api.Models;
 using Api.Repositories.Interfaces;
+using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.UseCases.Users.CreateUser
@@ -11,17 +12,36 @@ namespace Api.UseCases.Users.CreateUser
     public class CreateUserController : Controller
     {
         private IUserRepository _repository;
-        public CreateUserController(IUserRepository repository)
+        private ICryptographyService _cryptographyService;
+        public CreateUserController(IUserRepository repository, ICryptographyService cryptographyService)
         {
             this._repository = repository;
+            this._cryptographyService = cryptographyService;
         }
 
         [HttpPost]
         public IActionResult Execute(CreateUserDTO data)
         {
-            this.ValidateUserCreation(data);
+            try
+            {
+                var isValidEmail = Regex.IsMatch(data.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+                if (!isValidEmail)
+                {
+                    return BadRequest(new { message = "Invalid Email." });
+                }
+            }
+            catch (RegexMatchTimeoutException)
+            {
+                return BadRequest(new { message = "Invalid Email." });
+            }
+
+            if (data.Password != data.PasswordConfirmation)
+            {
+                return BadRequest(new { message = "Password confirmation does not match with password." });
+            }
 
             User user = new User(data);
+            user.Password = this._cryptographyService.EncryptPassword(user.Password);
 
             try
             {
@@ -33,27 +53,6 @@ namespace Api.UseCases.Users.CreateUser
             }
 
             return Ok();
-        }
-
-        public void ValidateUserCreation(CreateUserDTO data)
-        {
-            try
-            {
-                var isValidEmail = Regex.IsMatch(data.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
-                if (!isValidEmail)
-                {
-                    throw new Exception("Invalid Email.");
-                }
-            }
-            catch (RegexMatchTimeoutException)
-            {
-                throw new Exception("Invalid Email.");
-            }
-
-            if (data.Password != data.PasswordConfirmation)
-            {
-                throw new Exception("Password confirmation does not match with password.");
-            }
         }
     }
 }

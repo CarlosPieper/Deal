@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "5DzsMVhvZ78RGFc63Bpai5lHKUZHPQECcSsGCLjoJvrCosfAPjxK9LsayP8lspA4JrZtfx2CCLqdbRN3vHfIJg==",
+  "dgSpecHash": "0pIBQyP9CUjnc2PuhUYNiJSLPSBAyu/SAhU7ND9X3POjIBf1vo5IoNtmUndPjLUEI+xlDeOIgRgrdbD/P4dW9g==",
   "success": true,
   "projectFilePath": "/home/carlos/Projects/Deal/Api/Api.csproj",
   "expectedPackageFiles": [
+    "/home/carlos/.nuget/packages/fluentmigrator/3.2.15/fluentmigrator.3.2.15.nupkg.sha512",
+    "/home/carlos/.nuget/packages/fluentmigrator.abstractions/3.2.15/fluentmigrator.abstractions.3.2.15.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.aspnetcore.authentication/2.2.0/microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.2.0/microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.aspnetcore.authentication.core/2.2.0/microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
@@ -21,6 +23,7 @@
     "/home/carlos/.nuget/packages/microsoft.csharp/4.5.0/microsoft.csharp.4.5.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.extensions.apidescription.server/3.0.0/microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.extensions.configuration.abstractions/2.2.0/microsoft.extensions.configuration.abstractions.2.2.0.nupkg.sha512",
+    "/home/carlos/.nuget/packages/microsoft.extensions.dependencyinjection/2.0.0/microsoft.extensions.dependencyinjection.2.0.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.extensions.dependencyinjection.abstractions/2.2.0/microsoft.extensions.dependencyinjection.abstractions.2.2.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.extensions.fileproviders.abstractions/2.2.0/microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/microsoft.extensions.hosting.abstractions/2.2.0/microsoft.extensions.hosting.abstractions.2.2.0.nupkg.sha512",
@@ -54,7 +57,8 @@
     "/home/carlos/.nuget/packages/system.security.cryptography.xml/4.5.0/system.security.cryptography.xml.4.5.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/system.security.permissions/4.5.0/system.security.permissions.4.5.0.nupkg.sha512",
     "/home/carlos/.nuget/packages/system.security.principal.windows/4.5.0/system.security.principal.windows.4.5.0.nupkg.sha512",
-    "/home/carlos/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512"
+    "/home/carlos/.nuget/packages/system.text.encodings.web/4.5.0/system.text.encodings.web.4.5.0.nupkg.sha512",
+    "/home/carlos/.nuget/packages/system.valuetuple/4.4.0/system.valuetuple.4.4.0.nupkg.sha512"
   ],
   "logs": []
 }
