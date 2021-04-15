@@ -20,5 +20,10 @@ namespace Api.Models
             this.DefaultDeliveryAdress = "";
             this.CreationDate = new DateTime();
         }
+
+        public User()
+        {
+
+        }
     }
 }

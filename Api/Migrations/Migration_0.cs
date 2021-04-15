@@ -1,10 +1,11 @@
 using FluentMigrator;
 
-[Migration(04_13_2021_000)]
-public class Migration_04_13_2021_000 : Migration
+[Migration(0)]
+public class Migration_0 : Migration
 {
     public override void Down()
     {
+        Delete.Index("ix_users").OnTable("users");
         Delete.Table("users");
     }
 
@@ -17,5 +18,11 @@ public class Migration_04_13_2021_000 : Migration
         .WithColumn("password").AsString().NotNullable()
         .WithColumn("default_delivery_adress").AsString().NotNullable()
         .WithColumn("creation_date").AsDateTime().NotNullable();
+
+        Create.Index("ix_users")
+        .OnTable("users")
+        .OnColumn("id")
+        .Ascending()
+        .WithOptions().Clustered();
     }
 }
