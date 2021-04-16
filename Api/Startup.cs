@@ -14,12 +14,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using FluentMigrator.Runner;
 using Npgsql;
 using System.Reflection;
-using Api.Middlewares;
 
 namespace Api
 {
@@ -73,8 +71,6 @@ namespace Api
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            app.UseMiddleware<AuthenticationMiddleware>();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
@@ -83,7 +79,7 @@ namespace Api
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var migrator = scope.ServiceProvider.GetService<IMigrationRunner>();
-                migrator.MigrateUp();
+                migrator.MigrateUp(0);
             }
         }
     }

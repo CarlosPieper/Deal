@@ -18,7 +18,7 @@ namespace Api.Models
             this.Email = user.Email;
             this.Password = user.Password;
             this.DefaultDeliveryAdress = "";
-            this.CreationDate = new DateTime();
+            this.CreationDate = DateTime.Now;
         }
 
         public User()

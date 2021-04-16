@@ -2,8 +2,8 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using System.Threading.Tasks;
 using Api.Entities;
+using Api.Filters;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
@@ -65,12 +65,12 @@ namespace Api.UseCases.Users.AuthenticateUser
                         new Claim("UserId", user.Id)
                     }),
                 Expires = DateTime.UtcNow.AddHours(1),
-                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this._appSettings.JWTSecret)), SecurityAlgorithms.HmacSha256Signature)
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Convert.FromBase64String(this._appSettings.JWTSecret)), SecurityAlgorithms.HmacSha256Signature)
             };
             var tokenHandler = new JwtSecurityTokenHandler();
             var securityToken = tokenHandler.CreateToken(tokenDescriptor);
             var token = tokenHandler.WriteToken(securityToken);
-            return token;
+            return "Bearer " + token;
         }
     }
 }
