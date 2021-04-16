@@ -1,9 +1,7 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using System.Text;
 using Api.Entities;
-using Api.Filters;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;

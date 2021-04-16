@@ -1,9 +1,6 @@
 using System;
 using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using Api.Entities;
-using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.Extensions.Options;
@@ -80,8 +77,6 @@ namespace Api.Filters
                 context.Result = new UnauthorizedObjectResult("Invalid token.");
                 return;
             }
-
-            return;
         }
     }
 }

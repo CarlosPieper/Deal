@@ -1,4 +1,3 @@
-using System;
 using FluentMigrator;
 
 [Migration(0)]
@@ -12,7 +11,6 @@ public class Migration_0 : Migration
 
     public override void Up()
     {
-        Console.WriteLine("aeba");
         Create.Table("users")
         .WithColumn("id").AsFixedLengthString(36).PrimaryKey("id")
         .WithColumn("name").AsString().NotNullable()

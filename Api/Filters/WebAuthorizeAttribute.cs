@@ -1,6 +1,4 @@
-using System;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Api.Filters
 {
@@ -8,7 +6,7 @@ namespace Api.Filters
     {
         public WebAuthorizeAttribute() : base(typeof(WebAuthorizeFilter))
         {
-            Arguments = new object[] { };
+
         }
     }
 }
