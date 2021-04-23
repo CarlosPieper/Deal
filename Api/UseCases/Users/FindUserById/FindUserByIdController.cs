@@ -1,8 +1,6 @@
 using System;
-using System.Text.RegularExpressions;
-using Api.Models;
+using Api.Filters;
 using Api.Repositories.Interfaces;
-using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api.UseCases.Users.FindUserById
@@ -17,7 +15,8 @@ namespace Api.UseCases.Users.FindUserById
             this._repository = repository;
         }
 
-        [HttpPost]
+        [HttpGet]
+        [WebAuthorize]
         public IActionResult Execute(string id)
         {
             if (string.IsNullOrWhiteSpace(id))
@@ -29,6 +28,8 @@ namespace Api.UseCases.Users.FindUserById
 
                 if (user == null)
                     return BadRequest(new { message = "User not found." });
+
+                user.Password = "";
 
                 return Ok(new { user });
             }

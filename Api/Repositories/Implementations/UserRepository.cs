@@ -78,7 +78,28 @@ namespace Api.Repositories.Implementations
 
         public void Update(User user)
         {
-            throw new System.NotImplementedException();
+            string sql = $@"update users set 
+            name = @name, 
+            email = @email, 
+            password = @password, 
+            default_delivery_adress = @default_delivery_adress, 
+            creation_date = @creation_date,
+            last_update_date = @last_update_date
+            where id = @id";
+
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, this._connection))
+            {
+                command.Parameters.Add("id", NpgsqlTypes.NpgsqlDbType.Varchar).Value = user.Id;
+                command.Parameters.Add("name", NpgsqlTypes.NpgsqlDbType.Varchar).Value = user.Name;
+                command.Parameters.Add("email", NpgsqlTypes.NpgsqlDbType.Varchar).Value = user.Email;
+                command.Parameters.Add("password", NpgsqlTypes.NpgsqlDbType.Varchar).Value = user.Password;
+                command.Parameters.Add("default_delivery_adress", NpgsqlTypes.NpgsqlDbType.Varchar).Value = user.DefaultDeliveryAdress;
+                command.Parameters.Add("creation_date", NpgsqlTypes.NpgsqlDbType.Date).Value = user.CreationDate;
+                command.Parameters.Add("last_update_date", NpgsqlTypes.NpgsqlDbType.Date).Value = user.LastUpdateDate;
+                this._connection.Open();
+                command.ExecuteNonQuery();
+                this._connection.Close();
+            }
         }
     }
 }

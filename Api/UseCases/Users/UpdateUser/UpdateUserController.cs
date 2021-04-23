@@ -22,30 +22,35 @@ namespace Api.UseCases.Users.UpdateUser
         [HttpPost]
         public IActionResult Execute(UpdateUserDTO data)
         {
+
+            if (data.NewPassword != data.NewPasswordConfirmation)
+                return BadRequest(new { message = "Password confirmation does not match the password." });
+
             try
             {
                 var isValidEmail = Regex.IsMatch(data.Email, @"^[^@\s]+@[^@\s]+\.[^@\s]+$", RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
                 if (!isValidEmail)
-                {
                     return BadRequest(new { message = "Invalid Email." });
-                }
             }
             catch (RegexMatchTimeoutException)
             {
                 return BadRequest(new { message = "Invalid Email." });
             }
 
-            if (data.NewPassword != data.NewPasswordConfirmation)
-            {
-                return BadRequest(new { message = "Password confirmation does not match the password." });
-            }
-
-            User user = new User(data);
-            user.Password = this._cryptographyService.EncryptPassword(user.Password);
-
             try
             {
-                this._repository.Update(user);
+                var oldUser = this._repository.FindById(data.Id);
+
+                if (oldUser == null)
+                    return BadRequest(new { message = "Invalid user id" });
+
+                var newUser = new User(data);
+                newUser.Password = this._cryptographyService.EncryptPassword(newUser.Password);
+
+                if (oldUser.Password != newUser.Password)
+                    return BadRequest(new { message = "Wrong password" });
+
+                this._repository.Update(newUser);
             }
             catch (Exception ex)
             {
