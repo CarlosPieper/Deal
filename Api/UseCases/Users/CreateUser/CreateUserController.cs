@@ -37,7 +37,7 @@ namespace Api.UseCases.Users.CreateUser
 
             if (data.Password != data.PasswordConfirmation)
             {
-                return BadRequest(new { message = "Password confirmation does not match with password." });
+                return BadRequest(new { message = "Password confirmation does not match the password." });
             }
 
             User user = new User(data);

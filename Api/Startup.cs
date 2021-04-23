@@ -79,7 +79,7 @@ namespace Api
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var migrator = scope.ServiceProvider.GetService<IMigrationRunner>();
-                migrator.MigrateUp(0);
+                migrator.MigrateUp();
             }
         }
     }

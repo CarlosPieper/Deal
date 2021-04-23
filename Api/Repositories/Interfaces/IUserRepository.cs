@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Api.Models;
 
 namespace Api.Repositories.Interfaces

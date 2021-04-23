@@ -45,7 +45,10 @@ namespace Api.Filters
             var token = parts[1];
 
             if (!scheme.Contains("Bearer"))
-                throw new Exception("Token malformatted.");
+            {
+                context.Result = new UnauthorizedObjectResult("Token malformatted.");
+                return;
+            }
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var key = Convert.FromBase64String(this._appSettings.JWTSecret);
@@ -73,10 +76,8 @@ namespace Api.Filters
             }
 
             if (validationToken == null)
-            {
                 context.Result = new UnauthorizedObjectResult("Invalid token.");
-                return;
-            }
+
         }
     }
 }
