@@ -1,14 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Api.Entities;
 using Api.Repositories.Implementations;
 using Api.Repositories.Interfaces;
 using Api.Services.Implementations;
 using Api.Services.Interfaces;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +12,8 @@ using Microsoft.OpenApi.Models;
 using FluentMigrator.Runner;
 using Npgsql;
 using System.Reflection;
+using Api.Providers.Interfaces;
+using Api.Providers.Implementations;
 
 namespace Api
 {
@@ -39,6 +35,7 @@ namespace Api
             services.AddSingleton<NpgsqlConnection>(connection);
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<ICryptographyService, CryptographyService>();
+            services.AddSingleton<IMailProvider, MailProvider>();
 
             services.AddFluentMigratorCore()
                 .ConfigureRunner(cfg => cfg

@@ -8,7 +8,7 @@ namespace Api.Repositories.Implementations
 {
     public class UserRepository : IUserRepository
     {
-        NpgsqlConnection _connection;
+        private NpgsqlConnection _connection;
         public UserRepository(NpgsqlConnection connection)
         {
             this._connection = connection;

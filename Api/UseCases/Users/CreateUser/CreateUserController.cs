@@ -1,6 +1,8 @@
 using System;
 using System.Text.RegularExpressions;
+using Api.Entities;
 using Api.Models;
+using Api.Providers.Interfaces;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -13,10 +15,16 @@ namespace Api.UseCases.Users.CreateUser
     {
         private IUserRepository _repository;
         private ICryptographyService _cryptographyService;
-        public CreateUserController(IUserRepository repository, ICryptographyService cryptographyService)
+        private IMailProvider _mailProvider;
+        public CreateUserController(
+            IUserRepository repository,
+            ICryptographyService cryptographyService,
+            IMailProvider mailProvider
+            )
         {
             this._repository = repository;
             this._cryptographyService = cryptographyService;
+            this._mailProvider = mailProvider;
         }
 
         [HttpPost]
@@ -45,7 +53,29 @@ namespace Api.UseCases.Users.CreateUser
 
             try
             {
+                var userAlreadyExisting = this._repository.FindByEmail(user.Email);
+
+                if (userAlreadyExisting != null)
+                    return BadRequest(new { message = "Email already registered." });
+
                 this._repository.Create(user);
+                this._mailProvider.SendMail(
+                    new MailMessage
+                    {
+                        Subject = "Welcome to the platform!",
+                        Body = "Congratulations! Your account is now ready.",
+                        From = new MailAdress
+                        {
+                            Name = "Deal Administration",
+                            Email = "contact.atdeal@gmail.com",
+                        },
+                        To = new MailAdress
+                        {
+                            Name = user.Name,
+                            Email = user.Email,
+                        }
+                    }
+                );
             }
             catch (Exception ex)
             {

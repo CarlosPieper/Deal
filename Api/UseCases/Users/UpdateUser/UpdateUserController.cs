@@ -1,5 +1,6 @@
 using System;
 using System.Text.RegularExpressions;
+using Api.Filters;
 using Api.Models;
 using Api.Repositories.Interfaces;
 using Api.Services.Interfaces;
@@ -20,6 +21,7 @@ namespace Api.UseCases.Users.UpdateUser
         }
 
         [HttpPost]
+        [WebAuthorize]
         public IActionResult Execute(UpdateUserDTO data)
         {
 
@@ -44,12 +46,14 @@ namespace Api.UseCases.Users.UpdateUser
                 if (oldUser == null)
                     return BadRequest(new { message = "Invalid user id" });
 
-                var newUser = new User(data);
-                newUser.Password = this._cryptographyService.EncryptPassword(newUser.Password);
 
-                if (oldUser.Password != newUser.Password)
+                data.OldPassword = this._cryptographyService.EncryptPassword(data.OldPassword);
+
+                if (oldUser.Password != data.OldPassword)
                     return BadRequest(new { message = "Wrong password" });
 
+                var newUser = new User(data);
+                newUser.Password = this._cryptographyService.EncryptPassword(newUser.Password);
                 this._repository.Update(newUser);
             }
             catch (Exception ex)
