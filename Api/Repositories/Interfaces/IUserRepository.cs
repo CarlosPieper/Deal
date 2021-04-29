@@ -8,6 +8,5 @@ namespace Api.Repositories.Interfaces
         User FindByEmail(string email);
         User FindById(string id);
         void Update(User user);
-        void Deactivate(string id);
     }
 }

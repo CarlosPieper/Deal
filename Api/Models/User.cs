@@ -13,6 +13,7 @@ namespace Api.Models
         public string DefaultDeliveryAdress { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
+        public int UserIsActive { get; set; }
         public User(CreateUserDTO user)
         {
             this.Id = Guid.NewGuid().ToString();
@@ -22,6 +23,7 @@ namespace Api.Models
             this.DefaultDeliveryAdress = "";
             this.CreationDate = DateTime.Now;
             this.LastUpdateDate = DateTime.Now;
+            this.UserIsActive = 1;
         }
 
         public User(UpdateUserDTO user)
@@ -33,6 +35,7 @@ namespace Api.Models
             this.DefaultDeliveryAdress = user.DefaultDeliveryAdress;
             this.CreationDate = user.CreationDate;
             this.LastUpdateDate = DateTime.Now;
+            this.UserIsActive = user.UserIsActive;
         }
 
         public User()

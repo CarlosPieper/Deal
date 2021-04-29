@@ -18,7 +18,8 @@ public class _00_CreateUser : Migration
         .WithColumn("password").AsString().NotNullable()
         .WithColumn("default_delivery_adress").AsString().Nullable()
         .WithColumn("creation_date").AsDateTime().NotNullable()
-        .WithColumn("last_update_date").AsDateTime().NotNullable();
+        .WithColumn("last_update_date").AsDateTime().NotNullable()
+        .WithColumn("user_is_active").AsInt32().NotNullable().WithDefaultValue("1");
 
         Create.Index("ix_users")
         .OnTable("users")

@@ -12,6 +12,7 @@ namespace Api.UseCases.Users.UpdateUser
         public string NewPassword { get; set; }
         public string NewPasswordConfirmation { get; set; }
         public string DefaultDeliveryAdress { get; set; }
+        public int UserIsActive { get; set; }
 
     }
 }
