@@ -1,1 +1,1 @@
-New project trying Package By Feature, implementing unit tests for the 1st time
+New project using .NET 5 trying the Package by Feature pattern
