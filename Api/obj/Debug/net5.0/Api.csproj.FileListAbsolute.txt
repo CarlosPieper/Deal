@@ -10,7 +10,6 @@
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Swashbuckle.AspNetCore.Swagger.dll
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerGen.dll
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/Swashbuckle.AspNetCore.SwaggerUI.dll
-/home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.csprojAssemblyReference.cache
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.GeneratedMSBuildEditorConfig.editorconfig
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.AssemblyInfoInputs.cache
 /home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.AssemblyInfo.cs
@@ -66,3 +65,4 @@
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/MimeKit.dll
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/BouncyCastle.Crypto.dll
 /home/carlos/Projects/Deal/Api/bin/Debug/net5.0/appsettings.json
+/home/carlos/Projects/Deal/Api/obj/Debug/net5.0/Api.csproj.AssemblyReference.cache
